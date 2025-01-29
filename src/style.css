@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@font-face {
+  font-family: nature;
+  src: url(../naturaly/Naturaly.otf);
+}
+:root {
+  --primary: #ee889a;
+  --blackColor: #1e2122;
+  --whiteColor: #f7f7f7;
+  --greyColor: #e9e9e9;
+  --secondaryText: #b7bcbf;
+  --nature: "nature";
+}
+@layer base {
+  body {
+    font-family: var(--nature);
+  }
+}

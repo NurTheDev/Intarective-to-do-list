@@ -2,7 +2,7 @@ const taskInput = document.querySelector("#taskInput");
 const addTaskBtn = document.querySelector("#addTask");
 const taskContainer = document.querySelector("#taskContainer");
 const demoText = document.querySelector("#demoText");
-// const count = document.querySelector("#count");
+const count = document.querySelector("#count");
 
 addTaskBtn.addEventListener("click", () => {
   if (taskInput.value === "") {
@@ -15,11 +15,18 @@ addTaskBtn.addEventListener("click", () => {
     let span = document.createElement("span");
     span.innerHTML = "<img src='./public/close.svg' />";
     li.appendChild(span);
+    taskInput.value = "";
+    saveTask();
+    toggleDemoText();
+    updateCount(1);
   }
-  taskInput.value = "";
-  saveTask();
-  toggleDemoText();
 });
+
+let updateCount = (change) => {
+  const currentCount = parseInt(count.innerText);
+  const newCount = currentCount + change;
+  count.innerText = newCount;
+};
 taskContainer.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
     e.target.classList.toggle("complete");
@@ -29,6 +36,7 @@ taskContainer.addEventListener("click", (e) => {
     e.target.parentElement.parentElement.remove();
     saveTask();
     toggleDemoText();
+    updateCount(-1);
   }
 });
 let saveTask = () => {
@@ -44,6 +52,7 @@ let showTask = () => {
 let toggleDemoText = () => {
   if (taskContainer.innerHTML === "") {
     demoText.classList.remove("hidden");
+    count.innerContent = 0;
   } else {
     demoText.classList.add("hidden");
   }

@@ -56,6 +56,17 @@
     -ms-transform: scale(0.65);
     -o-transform: scale(0.65);
   }
+  .button {
+    @apply bg-primary py-[11px] px-6 rounded-2xl text-lg absolute top-0 right-0 cursor-pointer transition-all;
+  }
+  .button:hover {
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -moz-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    -o-transform: scale(0.95);
+  }
+
   span {
     position: absolute;
     right: 0;

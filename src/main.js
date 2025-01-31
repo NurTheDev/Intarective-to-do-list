@@ -2,6 +2,8 @@ const taskInput = document.querySelector("#taskInput");
 const addTaskBtn = document.querySelector("#addTask");
 const taskContainer = document.querySelector("#taskContainer");
 const demoText = document.querySelector("#demoText");
+// const count = document.querySelector("#count");
+
 addTaskBtn.addEventListener("click", () => {
   if (taskInput.value === "") {
     alert("Please enter any task first");
@@ -16,6 +18,7 @@ addTaskBtn.addEventListener("click", () => {
   }
   taskInput.value = "";
   saveTask();
+  toggleDemoText();
 });
 taskContainer.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
@@ -25,18 +28,25 @@ taskContainer.addEventListener("click", (e) => {
   if (e.target.tagName === "IMG") {
     e.target.parentElement.parentElement.remove();
     saveTask();
+    toggleDemoText();
   }
 });
 let saveTask = () => {
-  localStorage.setItem("data", taskContainer.innerHTML);
+  localStorage.setItem("task", taskContainer.innerHTML);
 };
 let showTask = () => {
-  const data = localStorage.getItem("data");
-  if (data) {
-    taskContainer.innerHTML = data;
+  const task = localStorage.getItem("task");
+  if (task) {
+    taskContainer.innerHTML = task;
+  }
+  toggleDemoText();
+};
+let toggleDemoText = () => {
+  if (taskContainer.innerHTML === "") {
+    demoText.classList.remove("hidden");
+  } else {
+    demoText.classList.add("hidden");
   }
 };
-if (taskContainer.innerHTML == "") {
-  demoText.classList.add("hidden");
-}
-showTask();
+
+document.addEventListener("DOMContentLoaded", showTask);
